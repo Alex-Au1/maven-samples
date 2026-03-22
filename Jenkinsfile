@@ -1,10 +1,5 @@
 pipeline {
   agent any
-  tools {  
-    maven 'DHT_MVN'  
-    jdk 'DHT_SENSE'  
-  } 
-
   stages {
     stage('check out') {
       steps {
@@ -18,5 +13,27 @@ pipeline {
       }
     }
 
+    stage('test') {
+      steps {
+        sh 'mvn test'
+      }
+    }
+
+    stage('verify') {
+      steps {
+        sh 'mvn verify'
+      }
+    }
+
+    stage('clean') {
+      steps {
+        sh 'mvn clean'
+      }
+    }
+
+  }
+  tools {
+    maven 'DHT_MVN'
+    jdk 'DHT_SENSE'
   }
 }
